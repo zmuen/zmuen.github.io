@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectItem from "../components/ProjectItem.astro";
+import { projects } from "../data/projects";
+---
+
+<BaseLayout title="Projects" description="Research and design projects">
+  <section class="page-header">
+    <p class="eyebrow">Projects</p>
+    <h1>Research platforms, fieldwork, and spatial essays.</h1>
+  </section>
+
+  <div class="stack-list">
+    {projects.map((project) => <ProjectItem {...project} />)}
+  </div>
+</BaseLayout>

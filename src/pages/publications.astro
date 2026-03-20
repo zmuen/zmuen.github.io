@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { publications } from "../data/publications";
+---
+
+<BaseLayout title="Publications" description="Selected publications">
+  <section class="page-header publications-header">
+    <p class="eyebrow">Publications</p>
+    <h1>Essays, papers, and catalog writing.</h1>
+  </section>
+
+  <section class="publication-list">
+    {publications
+      .sort((a, b) => b.year - a.year)
+      .map((publication) => (
+        <article class="publication-item">
+          <p class="publication-citation">
+            <span>{publication.authors}.</span>{" "}
+            <span class="publication-title">"{publication.title}."</span>{" "}
+            <em>{publication.venue}</em>, {publication.year}.
+          </p>
+          <p class="meta-note">{publication.type}</p>
+          {publication.abstract && <p>{publication.abstract}</p>}
+          {publication.link && (
+            <p>
+              <a href={publication.link}>View publication</a>
+            </p>
+          )}
+        </article>
+      ))}
+  </section>
+</BaseLayout>

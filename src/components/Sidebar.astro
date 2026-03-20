@@ -1,0 +1,43 @@
+---
+import { siteMeta } from "../data/site";
+import { withBase } from "../utils/withBase";
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/cv/", label: "CV" },
+  { href: "/publications/", label: "Publications" },
+  { href: "/projects/", label: "Projects" },
+  { href: "/blog/", label: "Writing" }
+];
+
+const currentPath = Astro.url.pathname
+  .replace(import.meta.env.BASE_URL.replace(/\/$/, ""), "")
+  .replace(/\/$/, "") || "/";
+---
+
+<aside class="sidebar">
+  <div class="sidebar-inner">
+    <a class="site-mark" href={withBase("/")}>{siteMeta.name}</a>
+    <p class="site-role">{siteMeta.role}</p>
+    <nav aria-label="Primary navigation">
+      <ul class="nav-list">
+        {navItems.map((item) => {
+          const normalizedHref = item.href === "/" ? "/" : item.href.replace(/\/$/, "");
+          const isActive = currentPath === normalizedHref;
+
+          return (
+            <li>
+                <a href={withBase(item.href)} class={isActive ? "is-active" : undefined}>
+                  {item.label}
+                </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+    <div class="sidebar-foot">
+      <p>{siteMeta.location}</p>
+      <a href={`mailto:${siteMeta.email}`}>{siteMeta.email}</a>
+    </div>
+  </div>
+</aside>

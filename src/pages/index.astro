@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostItem from "../components/PostItem.astro";
+import ProjectItem from "../components/ProjectItem.astro";
+import { siteMeta } from "../data/site";
+import { projects } from "../data/projects";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 2);
+---
+
+<BaseLayout title="Home" description={siteMeta.bio}>
+  <section class="hero">
+    <p class="eyebrow">Research Archive</p>
+    <h1>Spatial inquiry, environmental observation, and editorial field notes.</h1>
+    <p class="lead">{siteMeta.bio}</p>
+    <div class="link-row">
+      {siteMeta.links.map((link) => (
+        <a href={link.href} target="_blank" rel="noreferrer">
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="section-heading">
+      <p class="eyebrow">Selected Projects</p>
+      <h2>Recent work across urban systems, field methods, and environmental data.</h2>
+    </div>
+    <div class="stack-list">
+      {projects.slice(0, 2).map((project) => <ProjectItem {...project} />)}
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="section-heading">
+      <p class="eyebrow">Latest Writing</p>
+      <h2>Long-form essays, process notes, and research fragments.</h2>
+    </div>
+    <div class="stack-list">
+      {posts.map((post) => (
+        <PostItem
+          href={`/blog/${post.id.replace(/\.(md|mdx)$/, "")}/`}
+          title={post.data.title}
+          date={post.data.date}
+          category={post.data.category}
+          description={post.data.description}
+          image={post.data.image}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

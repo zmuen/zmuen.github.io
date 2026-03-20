@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostItem from "../components/PostItem.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<BaseLayout title="Writing" description="Writing and blog posts">
+  <section class="page-header">
+    <p class="eyebrow">Writing</p>
+    <h1>Notes, essays, and research fragments in progress.</h1>
+  </section>
+
+  <div class="stack-list">
+    {posts.map((post) => (
+      <PostItem
+        href={`/blog/${post.id.replace(/\.(md|mdx)$/, "")}/`}
+        title={post.data.title}
+        date={post.data.date}
+        category={post.data.category}
+        description={post.data.description}
+        image={post.data.image}
+      />
+    ))}
+  </div>
+</BaseLayout>

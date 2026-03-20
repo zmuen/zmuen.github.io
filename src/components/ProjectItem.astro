@@ -1,0 +1,26 @@
+---
+import { withBase } from "../utils/withBase";
+
+interface Props {
+  title: string;
+  date: string;
+  category: string;
+  description: string;
+  image: string;
+  alt: string;
+}
+
+const { title, date, category, description, image, alt } = Astro.props;
+---
+
+<article class="media-item">
+  <div class="media-thumb">
+    <img src={withBase(image)} alt={alt} loading="lazy" />
+  </div>
+  <div class="media-copy">
+    <p class="eyebrow">{category}</p>
+    <h2>{title}</h2>
+    <p class="meta-note">{date}</p>
+    <p>{description}</p>
+  </div>
+</article>

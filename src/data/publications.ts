@@ -10,33 +10,13 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
-    title: "Reading Urban Form Through Environmental Traces",
-    authors: "Muenzhang Zhang, A. Rivera",
+    title: "Using Spatial Analytics to Address Localized Environmental Harm",
+    authors: "N. Kumar, M. Zhang",
     venue: "Journal of Spatial Research",
-    year: 2025,
-    type: "Article",
-    link: "#",
-    abstract:
-      "A study of how air, heat, and mobility data can be read as parallel descriptions of urban structure."
-  },
-  {
-    title: "Topographic Interfaces for Civic Data Narratives",
-    authors: "Muenzhang Zhang",
-    venue: "Proceedings of the Urban Data Symposium",
     year: 2024,
-    type: "Conference Paper",
-    link: "#",
+    type: "Policy / Practice Guide",
+    link: "https://datasmart.hks.harvard.edu/sites/g/files/omnuum10826/files/datasmart/files/how-to_guide_for_cities_gis_cdhi.pdf",
     abstract:
-      "An exploration of cartographic visual language for public-facing environmental dashboards and archives."
+      "A practical framework for cities to use GIS tools to integrate, analyze, and visualize urban data in order to support evidence-based decision-making and improve public service delivery."
   },
-  {
-    title: "Field Notes on Infrastructure and Everyday Climate",
-    authors: "Muenzhang Zhang, S. Patel, L. Chen",
-    venue: "Exhibition Catalog: Ground Conditions",
-    year: 2023,
-    type: "Catalog Essay",
-    link: "#",
-    abstract:
-      "A reflective essay linking observational fieldwork with environmental sensing in dense metropolitan neighborhoods."
-  }
 ];

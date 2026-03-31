@@ -6,21 +6,26 @@ interface Props {
   date: string;
   category: string;
   description: string;
+  link?: string;
   image: string;
-  alt: string;
 }
 
-const { title, date, category, description, image, alt } = Astro.props;
+const { title, date, category, description, link, image } = Astro.props;
 ---
 
 <article class="media-item">
   <div class="media-thumb">
-    <img src={withBase(image)} alt={alt} loading="lazy" />
+    <img src={withBase(image)} alt="" loading="lazy" />
   </div>
   <div class="media-copy">
     <p class="eyebrow">{category}</p>
     <h2>{title}</h2>
     <p class="meta-note">{date}</p>
     <p>{description}</p>
+    {link?.trim() && (
+      <p>
+        <a href={link} target="_blank" rel="noreferrer">View project</a>
+      </p>
+    )}
   </div>
 </article>

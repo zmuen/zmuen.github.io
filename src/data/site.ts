@@ -5,7 +5,7 @@ export const siteMeta = {
   email: "muen.zhang@gatech.edu",
   location: "Cambridge, MA",
   bio:
-    "I study cities as layered archives of infrastructure, ecology, and human movement. This site gathers writing, projects, and publications in a single quiet record.",
+    "I study infrastructure systems through data, with a focus on how they behave under stress and how their impacts are unevenly distributed across space and society.",
   links: [
     { label: "GitHub", href: "https://github.com/zmuen" },
     { label: "Scholar", href: "https://scholar.google.com" },

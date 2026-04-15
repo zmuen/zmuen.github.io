@@ -13,9 +13,9 @@ export const projects: Project[] = [
     slug: "systems-and-learning-notebook",
     title: "Systems and Learning Notebook",
     date: "2025",
-    category: "Notebook Repo",
+    category: "Notebook",
     description:
-      "A note repo about complex systems, focusing on urban science research methodologies",
+      "A research notebook on complex systems, focusing on methods for understanding urban and infrastructure systems.",
     link: "https://zmuen.github.io/systems-and-learning-notebook/",
     image: "/images/project-heat.svg"
   },

@@ -6,8 +6,8 @@
   --line: rgba(23, 23, 23, 0.12);
   --accent: #304557;
   --sidebar-width: 18rem;
-  --content-width: 44rem;
-  --reading-width: 38rem;
+  --content-width: 50rem;
+  --reading-width: 42rem;
   --shadow: 0 20px 60px rgba(23, 23, 23, 0.04);
 }
 
@@ -186,7 +186,7 @@ img {
 }
 
 .section-block {
-  max-width: 50rem;
+  max-width: 56rem;
   margin-top: 3.5rem;
 }
 
@@ -239,14 +239,14 @@ img {
 }
 
 .page-header {
-  max-width: 42rem;
+  max-width: 48rem;
   padding: 1.5rem 0 3rem;
 }
 
 .cv-grid {
   display: grid;
   gap: 2.5rem;
-  max-width: 48rem;
+  max-width: 54rem;
 }
 
 .cv-grid h2 {
@@ -276,7 +276,7 @@ img {
 
 .publications-header,
 .publication-list {
-  max-width: 42rem;
+  max-width: 48rem;
   margin-left: clamp(0rem, 4vw, 3rem);
 }
 

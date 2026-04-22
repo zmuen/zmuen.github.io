@@ -159,7 +159,6 @@ img {
 .page-header h1,
 .post-header h1 {
   margin: 0.35rem 0 0;
-  max-width: 18ch;
   font-size: clamp(2.8rem, 7vw, 5rem);
   font-weight: 400;
   line-height: 1.05;
@@ -168,13 +167,11 @@ img {
 
 .lead,
 .lede {
-  max-width: 42rem;
   color: #262626;
   font-size: 1.2rem;
 }
 
 .hero {
-  max-width: var(--content-width);
   padding: 3rem 0 5rem;
 }
 
@@ -186,13 +183,11 @@ img {
 }
 
 .section-block {
-  max-width: 62rem;
   margin-top: 3.5rem;
 }
 
 .section-heading h2 {
   margin: 0.35rem 0 0;
-  max-width: 34rem;
   font-size: 1.9rem;
   font-weight: 400;
   line-height: 1.25;
@@ -235,18 +230,15 @@ img {
 
 .media-copy p {
   margin: 0.4rem 0 0;
-  max-width: 34rem;
 }
 
 .page-header {
-  max-width: 54rem;
   padding: 1.5rem 0 3rem;
 }
 
 .cv-grid {
   display: grid;
   gap: 2.5rem;
-  max-width: 54rem;
 }
 
 .cv-grid h2 {
@@ -276,7 +268,6 @@ img {
 
 .publications-header,
 .publication-list {
-  max-width: 54rem;
   margin-left: clamp(0rem, 4vw, 3rem);
 }
 

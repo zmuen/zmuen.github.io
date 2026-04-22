@@ -14,7 +14,7 @@ const posts = (await getCollection("blog"))
 <BaseLayout title="Home" description={siteMeta.bio}>
   <section class="hero">
     <p class="eyebrow">Research Archive</p>
-    <h1>Urban systems observation and field notes.</h1>
+    <h1>Urban systems observation and field notes</h1>
     <p class="lead">{siteMeta.bio}</p>
     <div class="link-row">
       {siteMeta.links.map((link) => (
@@ -28,7 +28,7 @@ const posts = (await getCollection("blog"))
   <section class="section-block">
     <div class="section-heading">
       <p class="eyebrow">Selected Projects</p>
-      <h2>Recent work across urban systems, quantitative methods, and geospatial data.</h2>
+      <h2>Recent work across urban systems, quantitative methods, and geospatial data</h2>
     </div>
     <div class="stack-list">
       {projects.slice(0, 2).map((project) => <ProjectItem {...project} />)}
@@ -38,7 +38,7 @@ const posts = (await getCollection("blog"))
   <section class="section-block">
     <div class="section-heading">
       <p class="eyebrow">Latest Writing</p>
-      <h2>Long-form essays, process notes, and research fragments.</h2>
+      <h2>Long-form essays, process notes, and research fragments</h2>
     </div>
     <div class="stack-list">
       {posts.map((post) => (

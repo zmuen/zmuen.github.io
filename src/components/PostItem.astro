@@ -10,13 +10,15 @@ interface Props {
   image?: string;
 }
 
-const { href, title, date, category, description, image = "/images/post-default.svg" } = Astro.props;
+const { href, title, date, category, description, image } = Astro.props;
 ---
 
 <article class="media-item">
-  <a class="media-thumb" href={withBase(href)}>
-    <img src={withBase(image)} alt="" loading="lazy" />
-  </a>
+  {image && (
+    <a class="media-thumb" href={withBase(href)}>
+      <img src={withBase(image)} alt="" loading="lazy" />
+    </a>
+  )}
   <div class="media-copy">
     <p class="eyebrow">{category}</p>
     <h2><a href={withBase(href)}>{title}</a></h2>

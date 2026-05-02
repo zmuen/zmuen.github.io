@@ -1,14 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import PostItem from "../components/PostItem.astro";
 import ProjectItem from "../components/ProjectItem.astro";
 import { siteMeta } from "../data/site";
 import { projects } from "../data/projects";
-import { getCollection } from "astro:content";
+import { publications } from "../data/publications";
 
-const posts = (await getCollection("blog"))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 2);
+const latestPublications = [...publications].sort((a, b) => b.year - a.year).slice(0, 2);
 ---
 
 <BaseLayout title="Home" description={siteMeta.bio}>
@@ -37,19 +34,21 @@ const posts = (await getCollection("blog"))
 
   <section class="section-block">
     <div class="section-heading">
-      <p class="eyebrow">Latest Writing</p>
-      <h2>Long-form essays, process notes, and research fragments</h2>
+      <p class="eyebrow">Latest Publication</p>
+      <h2>Essays, papers, and catalog writing</h2>
     </div>
-    <div class="stack-list">
-      {posts.map((post) => (
-        <PostItem
-          href={`/blog/${post.id.replace(/\.(md|mdx)$/, "")}/`}
-          title={post.data.title}
-          date={post.data.date}
-          category={post.data.category}
-          description={post.data.description}
-          image={post.data.image}
-        />
+    <div class="publication-list">
+      {latestPublications.map((pub) => (
+        <article class="publication-item">
+          <p class="publication-citation">
+            <span>{pub.authors}.</span>{" "}
+            <span class="publication-title">"{pub.title}."</span>{" "}
+            <em>{pub.venue}</em>, {pub.year}.
+          </p>
+          <p class="meta-note">{pub.type}</p>
+          {pub.abstract && <p>{pub.abstract}</p>}
+          {pub.link && <p><a href={pub.link}>View publication</a></p>}
+        </article>
       ))}
     </div>
   </section>

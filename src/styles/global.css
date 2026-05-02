@@ -208,6 +208,10 @@ img {
   align-items: start;
 }
 
+.media-item:not(:has(.media-thumb)) {
+  grid-template-columns: 1fr;
+}
+
 .media-thumb {
   overflow: hidden;
   border: 1px solid var(--line);
@@ -268,7 +272,7 @@ img {
 
 .publications-header,
 .publication-list {
-  margin-left: clamp(0rem, 4vw, 3rem);
+  margin-left: 0;
 }
 
 .publication-item {

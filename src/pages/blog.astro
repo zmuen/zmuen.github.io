@@ -22,7 +22,6 @@ const posts = (await getCollection("blog")).sort(
         date={post.data.date}
         category={post.data.category}
         description={post.data.description}
-        image={post.data.image}
       />
     ))}
   </div>

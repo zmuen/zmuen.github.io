@@ -1,7 +1,7 @@
 export const siteMeta = {
   name: "Muenzhang",
   title: "Muenzhang",
-  role: "Researcher in urban systems.",
+  role: "Researcher in urban systems",
   email: "muen.zhang@gatech.edu",
   location: "Cambridge, MA",
   bio:

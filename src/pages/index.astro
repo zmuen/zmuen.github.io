@@ -25,7 +25,7 @@ const latestPublications = [...publications].sort((a, b) => b.year - a.year).sli
   <section class="section-block">
     <div class="section-heading">
       <p class="eyebrow">Selected Projects</p>
-      <h2>Recent work across urban systems, quantitative methods, and geospatial data</h2>
+      <h2>Tools, models, and visualizations</h2>
     </div>
     <div class="stack-list">
       {projects.slice(0, 2).map((project) => <ProjectItem {...project} />)}
@@ -35,7 +35,7 @@ const latestPublications = [...publications].sort((a, b) => b.year - a.year).sli
   <section class="section-block">
     <div class="section-heading">
       <p class="eyebrow">Latest Publication</p>
-      <h2>Essays, papers, and catalog writing</h2>
+      <h2>Academic and applied writing</h2>
     </div>
     <div class="publication-list">
       {latestPublications.map((pub) => (

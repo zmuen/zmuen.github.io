@@ -10,8 +10,8 @@ const latestPublications = [...publications].sort((a, b) => b.year - a.year).sli
 
 <BaseLayout title="Home" description={siteMeta.bio}>
   <section class="hero">
-    <p class="eyebrow">Research Archive</p>
-    <h1>Urban systems observation, analysis and field notes</h1>
+    <p class="eyebrow">Research Profile</p>
+    <h1>Observability, networks, and adaptation in infrastructure systems</h1>
     <p class="lead">{siteMeta.bio}</p>
     <div class="link-row">
       {siteMeta.links.map((link) => (
@@ -25,7 +25,7 @@ const latestPublications = [...publications].sort((a, b) => b.year - a.year).sli
   <section class="section-block">
     <div class="section-heading">
       <p class="eyebrow">Selected Projects</p>
-      <h2>Tools, models, and visualizations</h2>
+      <h2>Models, measurements, and decision tools</h2>
     </div>
     <div class="stack-list">
       {projects.slice(0, 2).map((project) => <ProjectItem {...project} />)}
@@ -35,7 +35,7 @@ const latestPublications = [...publications].sort((a, b) => b.year - a.year).sli
   <section class="section-block">
     <div class="section-heading">
       <p class="eyebrow">Latest Publication</p>
-      <h2>Academic and applied writing</h2>
+      <h2>Research and applied writing</h2>
     </div>
     <div class="publication-list">
       {latestPublications.map((pub) => (

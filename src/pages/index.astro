@@ -11,13 +11,34 @@ const latestPublications = [...publications].sort((a, b) => b.year - a.year).sli
 <BaseLayout title="Home" description={siteMeta.bio}>
   <section class="hero">
     <p class="eyebrow">Research Profile</p>
-    <h1>Networks, observability and adaptation in infrastructure systems</h1>
+    <h1>Observability, inference, and decision-making in partially observable systems</h1>
     <p class="lead">{siteMeta.bio}</p>
     <div class="link-row">
       {siteMeta.links.map((link) => (
         <a href={link.href} target="_blank" rel="noreferrer">
           {link.label}
         </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="section-heading">
+      <p class="eyebrow">Latest Publication</p>
+      <h2>Publications</h2>
+    </div>
+    <div class="publication-list">
+      {latestPublications.map((pub) => (
+        <article class="publication-item">
+          <p class="publication-citation">
+            <span>{pub.authors.join(", ")}.</span>{" "}
+            <span class="publication-title">"{pub.title}."</span>{" "}
+            <em>{pub.venue}</em>, {pub.year}.{" "}
+            {pub.status} {pub.type}.
+          </p>
+          {/* pub.abstract && <p>{pub.abstract}</p> */}
+          {pub.link && <p><a href={pub.link}>View publication</a></p>}
+        </article>
       ))}
     </div>
   </section>
@@ -32,24 +53,4 @@ const latestPublications = [...publications].sort((a, b) => b.year - a.year).sli
     </div>
   </section>
 
-  <section class="section-block">
-    <div class="section-heading">
-      <p class="eyebrow">Latest Publication</p>
-      <h2>Research and applied writing</h2>
-    </div>
-    <div class="publication-list">
-      {latestPublications.map((pub) => (
-        <article class="publication-item">
-          <p class="publication-citation">
-            <span>{pub.authors}.</span>{" "}
-            <span class="publication-title">"{pub.title}."</span>{" "}
-            <em>{pub.venue}</em>, {pub.year}.
-          </p>
-          <p class="meta-note">{pub.type}</p>
-          {pub.abstract && <p>{pub.abstract}</p>}
-          {pub.link && <p><a href={pub.link}>View publication</a></p>}
-        </article>
-      ))}
-    </div>
-  </section>
 </BaseLayout>

@@ -6,7 +6,7 @@ import { publications } from "../data/publications";
 <BaseLayout title="Publications" description="Selected publications">
   <section class="page-header publications-header">
     <p class="eyebrow">Publications</p>
-    <h1>Academic and applied writing</h1>
+    <h1>Publications</h1>
   </section>
 
   <section class="publication-list">
@@ -15,12 +15,12 @@ import { publications } from "../data/publications";
       .map((publication) => (
         <article class="publication-item">
           <p class="publication-citation">
-            <span>{publication.authors}.</span>{" "}
+            <span>{publication.authors.join(", ")}.</span>{" "}
             <span class="publication-title">"{publication.title}."</span>{" "}
-            <em>{publication.venue}</em>, {publication.year}.
+            <em>{publication.venue}</em>, {publication.year}.{" "}
+            {publication.status} {publication.type}.
           </p>
-          <p class="meta-note">{publication.type}</p>
-          {publication.abstract && <p>{publication.abstract}</p>}
+          {/* publication.abstract && <p>{publication.abstract}</p> */}
           {publication.link && (
             <p>
               <a href={publication.link}>View publication</a>

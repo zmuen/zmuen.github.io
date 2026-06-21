@@ -34,7 +34,7 @@ const latestPublications = [...publications].sort((a, b) => b.year - a.year).sli
             <span>{pub.authors.join(", ")}.</span>{" "}
             <span class="publication-title">"{pub.title}."</span>{" "}
             <em>{pub.venue}</em>, {pub.year}.{" "}
-            {pub.status} {pub.type}
+            {pub.status}
           </p>
           {/* pub.abstract && <p>{pub.abstract}</p> */}
           {pub.link && <p><a href={pub.link}>View publication</a></p>}

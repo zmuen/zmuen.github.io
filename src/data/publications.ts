@@ -3,9 +3,8 @@
 export interface Publication {
   title: string;
   authors: string[];
-  venue: string;
+  venue?: string;
   year: number;
-  type?: string;
   status?: string;
   note?: string;
   link?: string;
@@ -20,13 +19,11 @@ export const publications: Publication[] = [
 
     authors: ["M. Zhang"],
 
-    venue: "Conference on Complex Systems",
+    venue: "",
 
     year: 2026,
 
-    type: "poster presentation",
-
-    status: "Accepted",
+    status: "Manuscript under review",
 
     tags: [
       "Network Science",
@@ -48,8 +45,6 @@ export const publications: Publication[] = [
     venue: "Data-Smart City Solutions",
 
     year: 2024,
-
-    type: "",
 
     status: "",
 

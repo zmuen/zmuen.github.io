@@ -13,6 +13,14 @@ const latestPublications = [...publications].sort((a, b) => b.year - a.year).sli
     <p class="eyebrow">Research Profile</p>
     <h1>Observability, inference, and decision-making in partially observable systems</h1>
     <p class="lead">{siteMeta.bio}</p>
+    <p class="research-pipeline">
+      {["Physical Systems", "Sensing", "Inference", "Decision"].map((stage, i) => (
+        <>
+          {i > 0 && <span class="pipeline-arrow" aria-hidden="true">→</span>}
+          <span>{stage}</span>
+        </>
+      ))}
+    </p>
     <div class="link-row">
       {siteMeta.links.map((link) => (
         <a href={link.href} target="_blank" rel="noreferrer">

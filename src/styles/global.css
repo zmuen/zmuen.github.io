@@ -175,6 +175,24 @@ img {
   padding: 3rem 0 5rem;
 }
 
+.research-pipeline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1.5rem 0 0;
+  color: var(--muted);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pipeline-arrow {
+  color: var(--accent);
+}
+
 .link-row {
   display: flex;
   flex-wrap: wrap;

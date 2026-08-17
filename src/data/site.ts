@@ -5,7 +5,7 @@ export const siteMeta = {
   email: "muen.zhang@gatech.edu",
   location: "",
   bio:
-    "I study how hidden system states can be inferred from partial observations, and how reliable decisions can be made despite incomplete information in complex systems. My research investigates the relationships among observable indicators, network structure, and latent system states, with the goal of understanding when local observations reflect system-level behavior and when they do not. These questions arise across cyber-physical systems, where critical system states cannot be directly observed and decisions must rely on partial, noisy observations.",
+    "I study how hidden system states can be inferred from partial observations, and how reliable decisions can be made despite incomplete information in complex systems. My research investigates the relationships among observable indicators, network structure, and latent system states, with the goal of understanding when local observations reflect system-level behavior and when they do not. These questions arise across physical systems, where critical system states cannot be directly observed and decisions must rely on partial, noisy observations.",
   links: [
     { label: "GitHub", href: "https://github.com/zmuen" },
     { label: "Scholar", href: "https://scholar.google.com" },

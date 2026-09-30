@@ -13,9 +13,9 @@ export interface Publication {
 }
 
 export const publications: Publication[] = [
-  {
+    {
     title:
-      "When Does Load Reflect Structural Centrality? State-Dependent Proxy Validity in Power Systems",
+      "Observation-Aware Graph Transfer for Ladder Fuel Density Under Coverage Distribution Shift",
 
     authors: ["M. Zhang"],
 
@@ -23,18 +23,39 @@ export const publications: Publication[] = [
 
     year: 2026,
 
-    status: "Manuscript under review",
+    status: "Accepted to NeurIPS 2026 Workshop: Tackling Climate Change with Machine Learning",
 
     tags: [
-      "Network Science",
-      "Infrastructure Systems",
-      "Power Systems",
-      "Complex Networks",
+      "Transfer Learning",
+      "Climate Change",
     ],
 
     abstract:
-      "This work investigates when locally observable load can serve as a reliable proxy for structural importance in power systems. Using state-dependent functional covariance networks, we show that load-centrality alignment degrades under stress and is governed by coupling concentration."
+      "A graph-based machine learning framework to estimate ladder fuel density from multi-source remote sensing data, addressing gaps in forest structure monitoring after wildfire and other disturbances. The work investigates when spatial and structural relationships remain informative under changing conditions, with the goal of enabling more timely, climate-adaptive wildfire fuel management."
   },
+
+  // {
+  //   title:
+  //     "When Does Load Reflect Structural Centrality? State-Dependent Proxy Validity in Power Systems",
+
+  //   authors: ["M. Zhang"],
+
+  //   venue: "",
+
+  //   year: 2026,
+
+  //   status: "Manuscript under review",
+
+  //   tags: [
+  //     "Network Science",
+  //     "Infrastructure Systems",
+  //     "Power Systems",
+  //     "Complex Networks",
+  //   ],
+
+  //   abstract:
+  //     "This work investigates when locally observable load can serve as a reliable proxy for structural importance in power systems. Using state-dependent functional covariance networks, we show that load-centrality alignment degrades under stress and is governed by coupling concentration."
+  // },
 
   {
     title:

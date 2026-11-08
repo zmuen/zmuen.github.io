@@ -20,6 +20,14 @@ const { title, description = siteMeta.bio } = Astro.props;
     <title>{title} | {siteMeta.title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
+    {import.meta.env.PROD && siteMeta.goatcounter && (
+      <script
+        is:inline
+        async
+        data-goatcounter={`https://${siteMeta.goatcounter}.goatcounter.com/count`}
+        src="https://gc.zgo.at/count.js"
+      ></script>
+    )}
   </head>
   <body>
     <div class="page-shell">

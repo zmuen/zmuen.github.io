@@ -1,0 +1,226 @@
+---
+// World map rendered to static SVG at build time.
+// Blue points = my footprint (src/data/footprint.ts).
+import { geoProjection, geoPath, type GeoRawProjection } from "d3-geo";
+import { feature, mesh } from "topojson-client";
+import type { Topology, GeometryCollection } from "topojson-specification";
+import type { FeatureCollection } from "geojson";
+import world from "world-atlas/countries-110m.json";
+import { footprint } from "../data/footprint";
+
+const topo = world as unknown as Topology<{ countries: GeometryCollection }>;
+const all = feature(topo, topo.objects.countries) as FeatureCollection;
+// Drop Antarctica to save vertical space.
+const countries: FeatureCollection = { ...all, features: all.features.filter((f) => f.id !== "010") };
+
+// Miller cylindrical: rectangular like a familiar wall map, with milder
+// high-latitude stretching than Mercator.
+const millerRaw: GeoRawProjection = (lambda, phi) => [lambda, 1.25 * Math.log(Math.tan(Math.PI / 4 + 0.4 * phi))];
+millerRaw.invert = (x, y) => [x, 2.5 * Math.atan(Math.exp(0.8 * y)) - 0.625 * Math.PI];
+
+const width = 720;
+const projection = geoProjection(millerRaw).fitWidth(width, countries);
+const path = geoPath(projection).digits(1);
+const [[, y0], [, y1]] = path.bounds(countries);
+const height = Math.ceil(y1 - Math.min(0, y0)) + 4;
+
+const landPath = path(countries) ?? "";
+const borderPath =
+  path(mesh(topo, topo.objects.countries, (a, b) => a !== b && a.id !== "010" && b.id !== "010")) ?? "";
+
+const project = (lng: number, lat: number) => {
+  const p = projection([lng, lat]);
+  return p ? { x: +p[0].toFixed(1), y: +p[1].toFixed(1) } : null;
+};
+
+const myDots = footprint
+  .map((f) => {
+    const p = project(f.lng, f.lat);
+    return p ? { ...p, conf: f.kind === "conference", tip: f.name, sub: f.detail ?? f.city } : null;
+  })
+  .filter((d) => d !== null);
+
+const hasConference = myDots.some((d) => d.conf);
+---
+
+<figure class="fmap">
+  <div class="fmap-canvas">
+    <svg
+      viewBox={`0 0 ${width} ${height}`}
+      role="group"
+      aria-label="World map of places I have lived, studied, and presented"
+    >
+      <path class="fmap-land" d={landPath} />
+      <path class="fmap-border" d={borderPath} />
+      <g class="fmap-me">
+        {myDots.map((d) => (
+          <circle
+            class={d.conf ? "is-conference" : undefined}
+            cx={d.x}
+            cy={d.y}
+            r="4.5"
+            tabindex="0"
+            data-tip={d.tip}
+            data-sub={d.sub}
+            aria-label={d.sub ? `${d.tip}. ${d.sub}` : d.tip}
+          />
+        ))}
+      </g>
+    </svg>
+    <div class="fmap-tip" role="tooltip" hidden></div>
+  </div>
+  {hasConference && (
+    <figcaption>
+      <ul class="fmap-legend">
+        <li><span class="fmap-key"></span>Lived &amp; studied</li>
+        <li><span class="fmap-key fmap-key--conf"></span>Presented</li>
+      </ul>
+    </figcaption>
+  )}
+</figure>
+
+<script>
+  for (const fig of document.querySelectorAll<HTMLElement>(".fmap")) {
+    const canvas = fig.querySelector<HTMLElement>(".fmap-canvas")!;
+    const tip = fig.querySelector<HTMLElement>(".fmap-tip")!;
+
+    const show = (el: Element) => {
+      const box = canvas.getBoundingClientRect();
+      const dot = el.getBoundingClientRect();
+      tip.replaceChildren();
+      const strong = document.createElement("strong");
+      strong.textContent = el.getAttribute("data-tip") ?? "";
+      tip.append(strong);
+      const sub = el.getAttribute("data-sub");
+      if (sub) {
+        const span = document.createElement("span");
+        span.textContent = sub;
+        tip.append(" ", span);
+      }
+      tip.hidden = false;
+      const x = dot.left + dot.width / 2 - box.left;
+      const y = dot.top - box.top;
+      const half = tip.offsetWidth / 2;
+      tip.style.left = `${Math.min(Math.max(x, half), box.width - half)}px`;
+      tip.style.top = `${y}px`;
+    };
+    const hide = () => (tip.hidden = true);
+
+    canvas.addEventListener("pointerover", (e) => {
+      const el = (e.target as Element).closest("[data-tip]");
+      if (el) show(el);
+    });
+    canvas.addEventListener("pointerout", (e) => {
+      if ((e.target as Element).closest("[data-tip]")) hide();
+    });
+    canvas.addEventListener("focusin", (e) => show(e.target as Element));
+    canvas.addEventListener("focusout", hide);
+  }
+</script>
+
+<style>
+  .fmap {
+    --fmap-me: #2f6fb3;
+    max-width: 42rem;
+    margin: 1.75rem 0 0;
+  }
+
+  .fmap-canvas {
+    position: relative;
+  }
+
+  .fmap svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .fmap-land {
+    fill: #e8e6e0;
+  }
+
+  .fmap-border {
+    fill: none;
+    stroke: var(--bg);
+    stroke-width: 0.6;
+    stroke-linejoin: round;
+  }
+
+  .fmap-me circle {
+    fill: var(--fmap-me);
+    stroke: #fff;
+    stroke-width: 1.5;
+    outline: none;
+    cursor: default;
+  }
+
+  .fmap-me circle.is-conference {
+    fill: #fff;
+    stroke: var(--fmap-me);
+    stroke-width: 2;
+  }
+
+  .fmap-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.5rem;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.92rem;
+  }
+
+  .fmap-legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .fmap-key {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: var(--fmap-me);
+  }
+
+  .fmap-key--conf {
+    border: 2px solid var(--fmap-me);
+    background: #fff;
+  }
+
+  .fmap-me circle:hover,
+  .fmap-me circle:focus-visible {
+    stroke: var(--text);
+  }
+
+  .fmap-tip {
+    position: absolute;
+    z-index: 2;
+    transform: translate(-50%, calc(-100% - 8px));
+    padding: 0.35rem 0.6rem;
+    border: 1px solid var(--line);
+    background: #fff;
+    box-shadow: 0 6px 20px rgba(23, 23, 23, 0.08);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  /* Tooltip children are created in JS, so they need :global to get styled. */
+  .fmap-tip :global(strong) {
+    font-weight: 500;
+  }
+
+  .fmap-tip :global(span) {
+    color: var(--muted);
+  }
+
+  /* Keep dots legible when the map is scaled down on phones. */
+  @media (max-width: 600px) {
+    .fmap-me circle {
+      r: 7px;
+    }
+  }
+</style>

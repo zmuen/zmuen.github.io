@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectItem from "../components/ProjectItem.astro";
+import FootprintMap from "../components/FootprintMap.astro";
 import { siteMeta } from "../data/site";
 import { projects } from "../data/projects";
 import { publications } from "../data/publications";
@@ -14,7 +15,7 @@ const latestPublications = [...publications].sort((a, b) => b.year - a.year).sli
     <h1>Observability, inference, and decision-making for infrastructure resilience</h1>
     <p class="lead">{siteMeta.bio}</p>
     <p class="research-pipeline">
-      {["Physical Systems", "Sensing", "Inference", "Decision"].map((stage, i) => (
+      {["Systems", "Observe", "Infer", "Decide", "Acquire"].map((stage, i) => (
         <>
           {i > 0 && <span class="pipeline-arrow" aria-hidden="true">→</span>}
           <span>{stage}</span>
@@ -59,6 +60,14 @@ const latestPublications = [...publications].sort((a, b) => b.year - a.year).sli
     <div class="stack-list">
       {projects.slice(0, 2).map((project) => <ProjectItem {...project} />)}
     </div>
+  </section>
+
+  <section class="section-block">
+    <div class="section-heading">
+      <p class="eyebrow">Footprints</p>
+      <h2>Places I have studied and presented</h2>
+    </div>
+    <FootprintMap />
   </section>
 
 </BaseLayout>

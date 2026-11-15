@@ -3,7 +3,7 @@
 // lat/lng in decimal degrees (north / east positive).
 // Hover tooltip shows `name` on the first line and `detail` on the second.
 
-export type FootprintKind = "home" | "education" | "conference";
+export type FootprintKind = "home" | "education" | "work" | "conference";
 
 export interface FootprintPlace {
   name: string;
@@ -32,12 +32,28 @@ export const footprint: FootprintPlace[] = [
     detail: "B.Sc. Architecture"
   },
   {
+    name: "Aparicio Fraga Arquitecto",
+    city: "Valencia, Spain",
+    lat: 39.4699,
+    lng: -0.3763,
+    kind: "work",
+    detail: "Architecture Internship"
+  },
+  {
     name: "Harvard University",
     city: "Cambridge, MA",
     lat: 42.377,
     lng: -71.117,
     kind: "education",
     detail: "MLA"
+  },
+  {
+    name: "HOK",
+    city: "San Francisco, CA",
+    lat: 37.7749,
+    lng: -122.4194,
+    kind: "work",
+    detail: "Planning Internship"
   },
   {
     name: "Georgia Institute of Technology",

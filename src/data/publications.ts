@@ -1,7 +1,21 @@
 // src/data/publications.ts
 
+export type PublicationCategory =
+  | "peer-reviewed" // journal articles, archival conference proceedings
+  | "workshop" // non-archival workshop papers (public, citable)
+  | "under-review" // submitted manuscripts / working papers
+  | "report"; // reports, white papers, practitioner guides
+
+export const publicationCategories: { key: PublicationCategory; label: string }[] = [
+  { key: "peer-reviewed", label: "Peer-Reviewed Publications" },
+  { key: "workshop", label: "Workshop Papers" },
+  { key: "under-review", label: "Under Review & Working Papers" },
+  { key: "report", label: "Reports" },
+];
+
 export interface Publication {
   title: string;
+  category: PublicationCategory;
   authors: string[];
   venue?: string;
   year: number;
@@ -16,6 +30,8 @@ export const publications: Publication[] = [
     {
     title:
       "Observation-Aware Graph Transfer for Ladder Fuel Density Under Coverage Distribution Shift",
+
+    category: "workshop",
 
     authors: ["M. Zhang"],
 
@@ -37,6 +53,8 @@ export const publications: Publication[] = [
   // {
   //   title:
   //     "When Does Load Reflect Structural Centrality? State-Dependent Proxy Validity in Power Systems",
+
+  //   category: "under-review",
 
   //   authors: ["M. Zhang"],
 
@@ -60,6 +78,8 @@ export const publications: Publication[] = [
   {
     title:
       "Using Spatial Analytics to Address Localized Environmental Harm",
+
+    category: "report",
 
     authors: ["N. Kumar", "M. Zhang"],
 

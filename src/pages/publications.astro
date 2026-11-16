@@ -1,6 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { publications } from "../data/publications";
+import { publications, publicationCategories } from "../data/publications";
+
+const groups = publicationCategories
+  .map((category) => ({
+    ...category,
+    items: publications
+      .filter((pub) => pub.category === category.key)
+      .sort((a, b) => b.year - a.year),
+  }))
+  .filter((group) => group.items.length > 0);
 ---
 
 <BaseLayout title="Publications" description="Selected publications">
@@ -9,24 +18,28 @@ import { publications } from "../data/publications";
     <h1>Publications</h1>
   </section>
 
-  <section class="publication-list">
-    {publications
-      .sort((a, b) => b.year - a.year)
-      .map((publication) => (
-        <article class="publication-item">
-          <p class="publication-citation">
-            <span>{publication.authors.join(", ")}.</span>{" "}
-            <span class="publication-title">"{publication.title}."</span>{" "}
-            <em>{publication.venue}</em>, {publication.year}.{" "}
-            {publication.status}
-          </p>
-          {/* publication.abstract && <p>{publication.abstract}</p> */}
-          {publication.link && (
-            <p>
-              <a href={publication.link}>View publication</a>
+  {groups.map((group) => (
+    <section class="publication-group">
+      <h2 class="publication-group-title">{group.label}</h2>
+      <div class="publication-list">
+        {group.items.map((publication) => (
+          <article class="publication-item">
+            <p class="publication-citation">
+              <span>{publication.authors.join(", ")}.</span>{" "}
+              <span class="publication-title">"{publication.title}."</span>{" "}
+              {publication.venue && <><em>{publication.venue}</em>, </>}
+              {publication.year}.{" "}
+              {publication.status}
             </p>
-          )}
-        </article>
-      ))}
-  </section>
+            {/* publication.abstract && <p>{publication.abstract}</p> */}
+            {publication.link && (
+              <p>
+                <a href={publication.link}>View publication</a>
+              </p>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
 </BaseLayout>
